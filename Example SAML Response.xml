@@ -1,0 +1,68 @@
+<samlp:Response 
+    xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+    xmlns:samlp="urn:oasis:names:tc:SAML:2.0:protocol" 
+    ID="{A unique ID of your choosing, could just be a GUID}" 
+    Version="2.0" 
+    IssueInstant="2024-06-05T12:30:13.9244056Z" 
+    Destination="{this is the relay URL, which can be found on Urgent and is actually returned in the Initiate URL request as the 'RelayState' parameter}" 
+    InResponseTo="{This is the ID value from the AuthnRequest}">
+
+  <saml:Issuer xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion">{Identity Provider name (Auth0, Jumpcloud or name of customer app if a custom one)}</saml:Issuer>
+  
+  <samlp:Status>
+    <samlp:StatusCode Value="urn:oasis:names:tc:SAML:2.0:status:Success"/>
+  </samlp:Status>
+
+  <saml:Assertion 
+    xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion" 
+    Version="2.0" 
+    ID="_54c69e0c-136a-4391-951d-85f6438cb12b" 
+    IssueInstant="2024-06-05T12:30:13.9244056Z">
+
+    <saml:Issuer>{Identity Provider name (Auth0, Jumpcloud or name of customer app if a custom one)}</saml:Issuer>
+    
+    <saml:Subject>
+      <saml:NameID Format="urn:oasis:names:tc:SAML:2.0:nameid-format:transient">{A unique ID of your choosing, could just be a GUID}</saml:NameID>
+      <saml:SubjectConfirmation Method="urn:oasis:names:tc:SAML:2.0:cm:bearer">
+        <saml:SubjectConfirmationData 
+            NotOnOrAfter="2024-06-05T13:30:13.9244056Z" 
+            Recipient="{this is the relay URL, which can be found on Urgent and is actually returned in the Initiate URL request as the 'RelayState' parameter}" 
+            InResponseTo="{This is the ID value from the AuthnRequest}"/>
+      </saml:SubjectConfirmation>
+    </saml:Subject>
+    
+    <saml:Conditions NotBefore="2024-06-05T12:30:13.9244056Z" NotOnOrAfter="2024-06-05T13:30:13.9244056Z"/>
+    
+    <saml:AuthnStatement AuthnInstant="2024-06-05T12:30:13.9244056Z" SessionIndex="_77cb8a80-7dcb-4902-b8c4-18200987b45f">
+      <saml:AuthnContext>
+        <saml:AuthnContextClassRef>urn:oasis:names:tc:SAML:2.0:ac:classes:PasswordProtectedTransport</saml:AuthnContextClassRef>
+      </saml:AuthnContext>
+    </saml:AuthnStatement>
+
+    <saml:AttributeStatement>
+      <saml:Attribute Name="username" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:basic">
+        <saml:AttributeValue xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xs:string">{Urgent Username}</saml:AttributeValue>
+      </saml:Attribute>
+    </saml:AttributeStatement>
+
+    <Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+      <SignedInfo>
+        <CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/>
+        <SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256"/>
+        <Reference URI="#_54c69e0c-136a-4391-951d-85f6438cb12b">
+          <Transforms>
+            <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/>
+          </Transforms>
+          <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/>
+          <DigestValue>{digest value}</DigestValue>
+        </Reference>
+      </SignedInfo>
+      <SignatureValue>{signature value}</SignatureValue>
+      <KeyInfo>
+        <X509Data>
+          <X509Certificate>{The base64 value of the certificate}</X509Certificate>
+        </X509Data>
+      </KeyInfo>
+    </Signature>
+  </saml:Assertion>
+</samlp:Response>
